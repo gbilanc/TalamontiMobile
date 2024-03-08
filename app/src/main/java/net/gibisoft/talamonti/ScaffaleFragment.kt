@@ -1,5 +1,6 @@
 package net.gibisoft.talamonti
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,25 +20,16 @@ import java.util.HashMap
 class ScaffaleFragment : Fragment() {
 
     private var columnCount = 1
-    val ITEMS: MutableList<Scaffale> = ArrayList()
-    val ITEM_MAP: MutableMap<String, Scaffale> = HashMap()
+    private val ITEMS: MutableList<Scaffale> = ArrayList()
+    private val ITEM_MAP: MutableMap<String, Scaffale> = HashMap()
 
-    init {
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
         ScaffaleController.lista(context).forEach {
             ITEMS.add(it)
             ITEM_MAP[it.codice] = it
         }
     }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,21 +47,6 @@ class ScaffaleFragment : Fragment() {
             }
         }
         return view
-    }
-
-    companion object {
-
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
-
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            ScaffaleFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
-                }
-            }
     }
 
 }

@@ -8,8 +8,7 @@ import net.gibisoft.talamonti.databinding.FragmentScaffaleBinding
 import net.gibisoft.talamonti.entities.Scaffale
 
 /**
- * [RecyclerView.Adapter] that can display a [PlaceholderItem].
- * TODO: Replace the implementation with code for your data type.
+ * [RecyclerView.Adapter] that can display a [Scaffale].
  */
 class ScaffaleRecyclerViewAdapter(
     private val values: List<Scaffale>
@@ -29,19 +28,16 @@ class ScaffaleRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.codice
-        holder.contentView.text = item.toString()
+        holder.text1.text = item.codice
+        holder.text2.text = item.toString()
     }
 
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(binding: FragmentScaffaleBinding) : RecyclerView.ViewHolder(binding.root) {
-        val idView: TextView = binding.itemNumber
-        val contentView: TextView = binding.content
+        val text1: TextView = binding.itemText11
+        val text2: TextView = binding.itemText12
 
-        override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
-        }
     }
 
 }
