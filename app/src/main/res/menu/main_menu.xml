@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_scaffali"
+        android:icon="@android:drawable/ic_menu_compass"
+        android:title="@string/scaffali" />
+    <item
+        android:id="@+id/menu_utensili"
+        android:icon="@android:drawable/ic_menu_compass"
+        android:title="@string/utensili" />
+</menu>
