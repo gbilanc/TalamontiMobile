@@ -1,0 +1,1 @@
+Gestione scaffali x Android
