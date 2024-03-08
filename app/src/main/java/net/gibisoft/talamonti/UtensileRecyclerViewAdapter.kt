@@ -10,9 +10,12 @@ import net.gibisoft.talamonti.entities.Utensile
 /**
  * [RecyclerView.Adapter] that can display a [Utensile].
  */
-class UtensileRecyclerViewAdapter(
-    private val values: List<Utensile>
-) : RecyclerView.Adapter<UtensileRecyclerViewAdapter.ViewHolder>() {
+class UtensileRecyclerViewAdapter : RecyclerView.Adapter<UtensileRecyclerViewAdapter.ViewHolder>() {
+
+    private var values: List<Utensile> = mutableListOf()
+    fun setValues(data: List<Utensile>) {
+        data.also { values = it }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -40,5 +43,4 @@ class UtensileRecyclerViewAdapter(
         val text2: TextView = binding.itemText2
 
     }
-
 }

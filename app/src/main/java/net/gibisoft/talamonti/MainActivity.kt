@@ -5,14 +5,12 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.add
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import net.gibisoft.talamonti.entities.CassettoController
-import net.gibisoft.talamonti.entities.ScaffaleController
-import net.gibisoft.talamonti.entities.UtensileController
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,12 +20,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        ScaffaleController.init_table(this)
-        CassettoController.init_table(this)
-        UtensileController.init_table(this)
+//        ScaffaleController.init_table(this)
+//        CassettoController.init_table(this)
+//        UtensileController.init_table(this)
 
         setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.my_toolbar))
+        val toolbar: Toolbar = findViewById<View>(R.id.my_toolbar) as Toolbar
+        setSupportActionBar(toolbar)
+        supportActionBar?.let {
+            it.setDisplayShowHomeEnabled(true)
+            it.setLogo(R.mipmap.ic_launcher_round)
+            it.setDisplayUseLogoEnabled(true)
+            it.title = ""
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -49,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.menu_utensili -> {
                 supportFragmentManager.commit {
-                    replace<UtensileFragment>(R.id.fragmentContainerView)
+                    replace<UtensileFilterFragment>(R.id.fragmentContainerView)
                     setReorderingAllowed(true)
                     addToBackStack("utensile")
                 }

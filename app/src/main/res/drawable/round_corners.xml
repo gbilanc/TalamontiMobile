@@ -3,7 +3,7 @@
     <solid android:color="@color/list_back"/>
 
     <stroke android:width="3dp"
-        android:color="#ff000000" />
+        android:color="@color/list_stroke" />
 
     <padding android:left="1dp"
         android:top="1dp"
