@@ -31,7 +31,7 @@ class CassettoController(val context: Context?) {
         database!!.replace("cassetti", null, contentValue)
     }
 
-    fun lista(): List<Cassetto> {
+    private fun lista(): List<Cassetto> {
         val result = ArrayList<Cassetto>()
         val columns = arrayOf("scaffale", "posizione", "capacita", "numpezzi")
         database!!.query(
@@ -51,7 +51,7 @@ class CassettoController(val context: Context?) {
         return result
     }
 
-    fun listaScaffale(scaffale: String): List<Cassetto> {
+    private fun listaScaffale(scaffale: String): List<Cassetto> {
         val result = ArrayList<Cassetto>()
         val columns = arrayOf("scaffale", "posizione", "capacita", "numpezzi")
         database!!.query(
@@ -96,30 +96,40 @@ class CassettoController(val context: Context?) {
         fun newInstance(context: Context?): CassettoController {
             return CassettoController(context).open()
         }
-
+        fun lista(context: Context?): List<Cassetto> {
+            with(newInstance(context)) {
+                return this.lista()
+            }
+        }
+        fun listaScaffale(context: Context?,scaffale: String): List<Cassetto> {
+            with(newInstance(context)) {
+                return this.listaScaffale(scaffale)
+            }
+        }
         fun init_table(context: Context?) {
-            val cassettoController = CassettoController.newInstance(context)
-            cassettoController.save(Cassetto("S001", 1, 2))
-            cassettoController.save(Cassetto("S001", 2, 3))
-            cassettoController.save(Cassetto("S001", 3, 4))
-            cassettoController.save(Cassetto("S001", 4, 3))
-            cassettoController.save(Cassetto("S001", 5, 2))
-            cassettoController.save(Cassetto("S001", 6, 2))
-            cassettoController.save(Cassetto("S001", 7, 3))
-            cassettoController.save(Cassetto("S001", 8, 4))
-            cassettoController.save(Cassetto("S001", 9, 3))
-            cassettoController.save(Cassetto("S001", 10, 2))
-            cassettoController.save(Cassetto("S002", 1, 2))
-            cassettoController.save(Cassetto("S002", 2, 1))
-            cassettoController.save(Cassetto("S002", 3, 1))
-            cassettoController.save(Cassetto("S002", 4, 3))
-            cassettoController.save(Cassetto("S002", 5, 2))
-            cassettoController.save(Cassetto("S002", 6, 1))
-            cassettoController.save(Cassetto("S002", 7, 1))
-            cassettoController.save(Cassetto("S002", 8, 2))
-            cassettoController.save(Cassetto("S002", 9, 3))
-            cassettoController.save(Cassetto("S002", 10, 1))
-            cassettoController.close()
+            with(newInstance(context)) {
+                this.save(Cassetto("S001", 1, 2))
+                this.save(Cassetto("S001", 2, 3))
+                this.save(Cassetto("S001", 3, 4))
+                this.save(Cassetto("S001", 4, 3))
+                this.save(Cassetto("S001", 5, 2))
+                this.save(Cassetto("S001", 6, 2))
+                this.save(Cassetto("S001", 7, 3))
+                this.save(Cassetto("S001", 8, 4))
+                this.save(Cassetto("S001", 9, 3))
+                this.save(Cassetto("S001", 10, 2))
+                this.save(Cassetto("S002", 1, 2))
+                this.save(Cassetto("S002", 2, 1))
+                this.save(Cassetto("S002", 3, 1))
+                this.save(Cassetto("S002", 4, 3))
+                this.save(Cassetto("S002", 5, 2))
+                this.save(Cassetto("S002", 6, 1))
+                this.save(Cassetto("S002", 7, 1))
+                this.save(Cassetto("S002", 8, 2))
+                this.save(Cassetto("S002", 9, 3))
+                this.save(Cassetto("S002", 10, 1))
+                this.close()
+            }
         }
     }
 
