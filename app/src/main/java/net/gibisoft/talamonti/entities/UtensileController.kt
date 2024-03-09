@@ -12,17 +12,32 @@ class UtensileController(val context: Context?) {
     private var database: SQLiteDatabase? = null
 
     @Throws(SQLException::class)
-    fun open(): UtensileController {
+    private fun open(): UtensileController {
         dbHelper = DatabaseHelper(context)
         database = dbHelper!!.writableDatabase
         return this
     }
 
-    fun close() {
+    private fun close() {
         dbHelper!!.close()
     }
 
-    fun save(utensile:Utensile) {
+    private fun load(codice: String): Utensile {
+        val columns = arrayOf("codice", "descrizione", "scaffale", "posizione")
+        database!!.query(
+            "utensili", columns, "codice=?", arrayOf(codice), null, null, null
+        ).use {
+            it.moveToFirst()
+            return Utensile(
+                it.getString(0),
+                it.getString(1),
+                it.getString(2),
+                it.getInt(3)
+            )
+        }
+    }
+
+    private fun save(utensile: Utensile) {
         val contentValue = ContentValues()
         contentValue.put("codice", utensile.codice)
         contentValue.put("descrizione", utensile.descrizione)
@@ -30,6 +45,11 @@ class UtensileController(val context: Context?) {
         contentValue.put("posizione", utensile.posizione)
         database!!.replace("utensili", null, contentValue)
     }
+
+    private fun delete(codice: String?) {
+        database!!.delete("utensili", "codice=?", arrayOf(codice))
+    }
+
 
     private fun lista(): List<Utensile> {
         val result = ArrayList<Utensile>()
@@ -51,50 +71,31 @@ class UtensileController(val context: Context?) {
         return result
     }
 
-    fun lista(desc: String): List<Utensile> {
-        val result = ArrayList<Utensile>()
-        val columns = arrayOf("codice", "descrizione", "scaffale", "posizione")
-        database!!.query(
-            "utensili", columns, "descrizione LIKE %?%", arrayOf(desc), null, null, "descrizione"
-        ).use {
-            while (it.moveToNext()) {
-                result.add(
-                    Utensile(
-                        it.getString(0),
-                        it.getString(1),
-                        it.getString(2),
-                        it.getInt(3)
-                    )
-                )
-            }
-        }
-        return result
-    }
-
-    fun delete(codice: String?) {
-        database!!.delete("utensili", "codice=?", arrayOf(codice))
-    }
-
-    fun load(codice: String): Utensile {
-        val columns = arrayOf("codice", "descrizione", "scaffale", "posizione")
-        database!!.query(
-            "utensili", columns, "codice=?", arrayOf(codice), null, null, null
-        ).use {
-            it.moveToFirst()
-            return Utensile(
-                it.getString(0),
-                it.getString(1),
-                it.getString(2),
-                it.getInt(3)
-            )
-        }
-    }
 
     companion object {
 
         fun newInstance(context: Context?): UtensileController {
             return UtensileController(context).open()
         }
+
+        fun load(context: Context?, codice: String): Utensile {
+            with(newInstance(context)) {
+                return this.load(codice)
+            }
+        }
+
+        fun save(context: Context?, utensile: Utensile) {
+            with(newInstance(context)) {
+                this.save(utensile)
+            }
+        }
+
+        fun delete(context: Context?, codice: String?) {
+            with(newInstance(context)) {
+                this.delete(codice)
+            }
+        }
+
         fun lista(context: Context?): List<Utensile> {
             with(newInstance(context)) {
                 return this.lista()

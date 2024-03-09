@@ -7,28 +7,48 @@ import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 
 
-class CassettoController(val context: Context?) {
+class CassettoController(private val context: Context?) {
 
     private var dbHelper: DatabaseHelper? = null
     private var database: SQLiteDatabase? = null
 
     @Throws(SQLException::class)
-    fun open(): CassettoController {
+    private fun open(): CassettoController {
         dbHelper = DatabaseHelper(context)
         database = dbHelper!!.writableDatabase
         return this
     }
 
-    fun close() {
+    private fun close() {
         dbHelper!!.close()
     }
 
-    fun save(cassetto:Cassetto) {
+    private fun load(scaffale: String, posizione: Int): Cassetto {
+        val columns = arrayOf("scaffale", "posizione", "capacita", "numpezzi")
+        val args = arrayOf(scaffale, posizione.toString())
+        database!!.query(
+            "cassetti_view", columns, "scaffale=? AND posizione=?", args, null, null, null
+        ).use {
+            it.moveToFirst()
+            return Cassetto(
+                it.getString(0),
+                it.getInt(1),
+                it.getInt(2),
+                it.getInt(3)
+            );
+        }
+    }
+
+    private fun save(cassetto: Cassetto) {
         val contentValue = ContentValues()
         contentValue.put("scaffale", cassetto.scaffale)
         contentValue.put("posizione", cassetto.posizione)
         contentValue.put("capacita", cassetto.capacita)
         database!!.replace("cassetti", null, contentValue)
+    }
+
+    private fun delete(scaffale: String?) {
+        database!!.delete("cassetto", "scaffale=?", arrayOf(scaffale))
     }
 
     private fun lista(): List<Cassetto> {
@@ -51,61 +71,64 @@ class CassettoController(val context: Context?) {
         return result
     }
 
-    private fun listaScaffale(scaffale: String): List<Cassetto> {
-        val result = ArrayList<Cassetto>()
+    private fun listaScaffale(scaffale: String): Array<Cassetto?> {
+        val result = arrayOfNulls<Cassetto>(20)
         val columns = arrayOf("scaffale", "posizione", "capacita", "numpezzi")
         database!!.query(
             "cassetti_view", columns, "scaffale=?", arrayOf(scaffale), null, null, "posizione"
         ).use {
             while (it.moveToNext()) {
-                result.add(
+                result[it.getInt(1)]=
                     Cassetto(
                         it.getString(0),
                         it.getInt(1),
                         it.getInt(2),
                         it.getInt(3)
                     )
-                )
             }
         }
         return result
     }
 
-    fun delete(scaffale: String?) {
-        database!!.delete("cassetto", "scaffale=?", arrayOf(scaffale))
-    }
-
-    fun load(scaffale: String, posizione: Int): Cassetto {
-        val columns = arrayOf("scaffale", "posizione", "capacita", "numpezzi")
-        val args = arrayOf(scaffale, posizione.toString())
-        database!!.query(
-            "cassetti_view", columns, "scaffale=? AND posizione=?", args, null, null, null
-        ).use {
-            it.moveToFirst()
-            return Cassetto(
-                it.getString(0),
-                it.getInt(1),
-                it.getInt(2),
-                it.getInt(3)
-            );
-        }
-    }
 
     companion object {
 
         fun newInstance(context: Context?): CassettoController {
             return CassettoController(context).open()
         }
+
+        fun load(context: Context?, scaffale: String, posizione: Int): Cassetto {
+            with(newInstance(context)) {
+                return this.load(scaffale, posizione)
+            }
+        }
+
+        fun save(context: Context?, cassetto: Cassetto) {
+            with(newInstance(context)) {
+                this.save(cassetto)
+            }
+
+        }
+
+        fun delete(context: Context?, scaffale: String?) {
+            with(newInstance(context)) {
+                this.delete(scaffale)
+            }
+
+        }
+
         fun lista(context: Context?): List<Cassetto> {
             with(newInstance(context)) {
                 return this.lista()
             }
         }
-        fun listaScaffale(context: Context?,scaffale: String): List<Cassetto> {
+
+        fun listaScaffale(context: Context?, scaffale: String): Array<Cassetto?> {
             with(newInstance(context)) {
                 return this.listaScaffale(scaffale)
             }
         }
+
         fun init_table(context: Context?) {
             with(newInstance(context)) {
                 this.save(Cassetto("S001", 1, 2))

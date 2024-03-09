@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import net.gibisoft.talamonti.entities.CassettoController
+import net.gibisoft.talamonti.entities.ScaffaleController
+import net.gibisoft.talamonti.entities.UtensileController
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,9 +23,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-//        ScaffaleController.init_table(this)
-//        CassettoController.init_table(this)
-//        UtensileController.init_table(this)
+        ScaffaleController.init_table(this)
+        CassettoController.init_table(this)
+        UtensileController.init_table(this)
 
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById<View>(R.id.my_toolbar) as Toolbar
