@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import net.gibisoft.talamonti.entities.CassettoController
 import net.gibisoft.talamonti.entities.ScaffaleController
 import net.gibisoft.talamonti.entities.UtensileController
 
@@ -24,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
 
         ScaffaleController.init_table(this)
-        CassettoController.init_table(this)
         UtensileController.init_table(this)
 
         setContentView(R.layout.activity_main)

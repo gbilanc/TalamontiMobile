@@ -5,7 +5,7 @@ data class Utensile(
     var codice: String = "",
     var descrizione: String = "",
     var scaffale: String = "",
-    var posizione: Int = 1
+    var posizione: Int = 0
 ) {
 
     fun getCodiceAndDescrizione(): String {

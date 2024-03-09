@@ -5,6 +5,8 @@ data class Scaffale(
     var indirizzo: String = "",
     var porta: Int = 9600
 ) {
-    var cassetti = arrayOfNulls<Cassetto>(20)
-
+    var cassetti: Array<Cassetto> = Array(20) { index ->
+        Cassetto(codice, index + 1, 1, 0)
+    }
 }
+

@@ -2,7 +2,6 @@ package net.gibisoft.talamonti.entities
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 
@@ -42,10 +41,18 @@ class ScaffaleController() {
         contentValue.put("indirizzo", scaffale.indirizzo)
         contentValue.put("porta", scaffale.porta)
         database!!.replace("scaffali", null, contentValue)
+        scaffale.cassetti!!.forEach {
+            contentValue.clear()
+            contentValue.put("scaffale", it.scaffale)
+            contentValue.put("posizione", it.posizione)
+            contentValue.put("capacita", it.capacita)
+            database!!.replace("cassetti", null, contentValue)
+        }
     }
 
     private fun delete(codice: String?) {
         database!!.delete("scaffali", "codice=?", arrayOf(codice))
+        database!!.delete("cassetti", "scaffale=?", arrayOf(codice))
     }
 
     private fun lista(): List<Scaffale> {
@@ -67,6 +74,27 @@ class ScaffaleController() {
         return result
     }
 
+    private fun lista_cassetti(scaffale: String): Array<Cassetto> {
+        val result = Array(20) { index ->
+            Cassetto(scaffale, index + 1, 1, 0)
+        }
+        val columns = arrayOf("scaffale", "posizione", "capacita", "numpezzi")
+        database!!.query(
+            "cassetti_view", columns, "scaffale=?", arrayOf(scaffale), null, null, "posizione"
+        ).use {
+            while (it.moveToNext()) {
+                result[it.getInt(1) - 1] =
+                    Cassetto(
+                        it.getString(0),
+                        it.getInt(1),
+                        it.getInt(2),
+                        it.getInt(3)
+                    )
+            }
+        }
+        return result
+    }
+
 
     companion object {
 
@@ -76,8 +104,8 @@ class ScaffaleController() {
 
         fun load(context: Context?, codice: String): Scaffale {
             with(newInstance(context)) {
-                with(this.load(codice)) {
-                    cassetti = CassettoController.listaScaffale(context, codice)
+                with(load(codice)) {
+                    cassetti = lista_cassetti(codice)
                     return this
                 }
             }
