@@ -27,12 +27,6 @@ class ScaffaleListaFragment : Fragment() {
     private var scaffaleAdapter = ScaffaleRecyclerViewAdapter(handler2)
     private var _binding: FragmentScaffaleListaBinding? = null
     private val binding get() = _binding!!
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        ScaffaleController.lista(context).forEach {
-            lista.add(it)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -45,8 +39,19 @@ class ScaffaleListaFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        lista.clear()
+        ScaffaleController.lista(context).forEach {
+            lista.add(it)
+        }
+    }
     private fun addNewScaffale() {
         handler2.onItemClick(Scaffale())
+    }
+
+    companion object {
+        fun newInstance() = ScaffaleListaFragment()
     }
 
 }

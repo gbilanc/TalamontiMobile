@@ -62,7 +62,7 @@ class ScaffaleController {
         val result = ArrayList<Scaffale>()
         val columns = arrayOf("codice", "indirizzo", "porta")
         database!!.query(
-            "scaffali", columns, null, null, null, null, null
+            "scaffali", columns, null, null, null, null, "codice"
         ).use {
             while (it.moveToNext()) {
                 result.add(

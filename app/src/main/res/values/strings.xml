@@ -19,4 +19,6 @@
     <string name="save">save</string>
     <string name="delete">delete</string>
     <string name="homepage">homepage</string>
+    <string name="message1">registrazione completata!!!</string>
+    <string name="message2">confermi la cancellazione??</string>
 </resources>

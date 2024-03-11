@@ -58,7 +58,7 @@ class UtensileController(val context: Context?) {
         val result = ArrayList<Utensile>()
         val columns = arrayOf("codice", "descrizione", "scaffale", "posizione")
         database!!.query(
-            "utensili", columns, null, null, null, null, null
+            "utensili", columns, null, null, null, null, "codice"
         ).use {
             while (it.moveToNext()) {
                 result.add(

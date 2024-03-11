@@ -48,20 +48,22 @@ class MainActivity : AppCompatActivity() {
         // Handle item selection.
         return when (item.itemId) {
             R.id.menu_scaffali -> {
+                val editFragment = ScaffaleListaFragment.newInstance()
                 supportFragmentManager.commit {
-                    replace<ScaffaleListaFragment>(R.id.fragmentContainerView)
+                    replace(R.id.fragmentContainerView, editFragment)
                     setReorderingAllowed(true)
-                    addToBackStack("scaffale")
+                    addToBackStack("scaffale_lista")
                 }
                 Log.i("MainActivity2.menu", "menu scaffali clicked!")
                 true
             }
 
             R.id.menu_utensili -> {
+                val editFragment = UtensileListaFragment.newInstance()
                 supportFragmentManager.commit {
-                    replace<UtensileListaFragment>(R.id.fragmentContainerView)
+                    replace(R.id.fragmentContainerView, editFragment)
                     setReorderingAllowed(true)
-                    addToBackStack("utensile")
+                    addToBackStack("utensile_lista")
                 }
                 Log.i("MainActivity2.menu", "menu utensili clicked!")
                 true

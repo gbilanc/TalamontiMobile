@@ -1,9 +1,12 @@
 package net.gibisoft.talamonti
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import net.gibisoft.talamonti.databinding.FragmentScaffaleEditBinding
 import net.gibisoft.talamonti.entities.Scaffale
@@ -53,13 +56,35 @@ class ScaffaleEditFragment : Fragment() {
     }
 
     private fun save() {
+        val scaffale = Scaffale(
+            binding.editTextCodice.text.toString(),
+            binding.editTextIndirizzo.text.toString(),
+            Integer.parseInt(binding.editTextPorta.text.toString())
+        )
+        ScaffaleController.save(context, scaffale)
+        Toast.makeText(activity, getString(R.string.message1), Toast.LENGTH_SHORT).show();
         requireActivity().supportFragmentManager.popBackStack()
-        TODO("Implementare salvataggio scaffale")
     }
 
     private fun delete() {
-        requireActivity().supportFragmentManager.popBackStack()
-        TODO("Implementare cancellazione scaffale")
+        deleteDialog().show()
+    }
+
+    private fun deleteDialog(): AlertDialog {
+        val dialogBuilder = AlertDialog.Builder(activity)
+        dialogBuilder.setMessage(getString(R.string.message2))
+            .setCancelable(true)
+            .setPositiveButton("Si") { dialog, id ->
+                run {
+                    ScaffaleController.delete(context, binding.editTextCodice.text.toString())
+                    requireActivity().supportFragmentManager.popBackStack()
+                }
+                dialog.dismiss()
+            }
+            .setNegativeButton("No") { dialog, id ->
+                dialog.dismiss()
+            }
+        return dialogBuilder.create()
     }
 
     companion object {

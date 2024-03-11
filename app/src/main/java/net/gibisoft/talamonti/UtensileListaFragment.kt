@@ -27,8 +27,10 @@ class UtensileListaFragment : Fragment() {
     private var utensileAdapter = UtensileRecyclerViewAdapter(handler1)
     private var _binding: FragmentUtensileListaBinding? = null
     private val binding get() = _binding!!
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+
+    override fun onResume() {
+        super.onResume()
+        lista.clear()
         UtensileController.lista(context).forEach {
             lista.add(it)
         }
@@ -56,5 +58,9 @@ class UtensileListaFragment : Fragment() {
 
     private fun addNewUtensile() {
         handler1.onItemClick(Utensile())
+    }
+
+    companion object {
+        fun newInstance() = UtensileListaFragment()
     }
 }

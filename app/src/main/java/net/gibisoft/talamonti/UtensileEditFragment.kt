@@ -1,9 +1,11 @@
 package net.gibisoft.talamonti
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import net.gibisoft.talamonti.databinding.FragmentUtensileEditBinding
 import net.gibisoft.talamonti.entities.Utensile
@@ -57,13 +59,36 @@ class UtensileEditFragment : Fragment() {
     }
 
     private fun save() {
+        val utensile = Utensile(
+            binding.editTextCodice.text.toString(),
+            binding.editTextDescrizione.text.toString(),
+            binding.editTextScaffale.text.toString(),
+            Integer.parseInt(binding.editTextPosizione.text.toString())
+        )
+        UtensileController.save(context, utensile)
+        Toast.makeText(activity, getString(R.string.message1), Toast.LENGTH_SHORT).show();
         requireActivity().supportFragmentManager.popBackStack()
-        TODO("Implementare salvataggio utensile")
     }
 
     private fun delete() {
-        requireActivity().supportFragmentManager.popBackStack()
-        TODO("Implementare cancellazione utensile")
+        deleteDialog().show()
+    }
+
+    private fun deleteDialog(): AlertDialog {
+        val dialogBuilder = AlertDialog.Builder(activity)
+        dialogBuilder.setMessage(getString(R.string.message2))
+            .setCancelable(true)
+            .setPositiveButton("Si") { dialog, id ->
+                run {
+                    UtensileController.delete(context, binding.editTextCodice.text.toString())
+                    requireActivity().supportFragmentManager.popBackStack()
+                }
+                dialog.dismiss()
+            }
+            .setNegativeButton("No") { dialog, id ->
+                dialog.dismiss()
+            }
+        return dialogBuilder.create()
     }
 
     companion object {
