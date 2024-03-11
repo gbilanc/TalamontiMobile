@@ -11,12 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import net.gibisoft.talamonti.entities.Scaffale
 import net.gibisoft.talamonti.entities.ScaffaleController
+import net.gibisoft.talamonti.entities.Utensile
 import net.gibisoft.talamonti.entities.UtensileController
 
 
 class MainActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,29 +43,46 @@ class MainActivity : AppCompatActivity() {
         inflater.inflate(R.menu.main_menu, menu)
         return true
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection.
         return when (item.itemId) {
             R.id.menu_scaffali -> {
                 supportFragmentManager.commit {
-                    replace<ScaffaleFragment>(R.id.fragmentContainerView)
+                    replace<ScaffaleListaFragment>(R.id.fragmentContainerView)
                     setReorderingAllowed(true)
                     addToBackStack("scaffale")
                 }
-                Log.i("MainActivity2.menu","menu scaffali clicked!")
+                Log.i("MainActivity2.menu", "menu scaffali clicked!")
                 true
             }
+
             R.id.menu_utensili -> {
                 supportFragmentManager.commit {
-                    replace<UtensileFilterFragment>(R.id.fragmentContainerView)
+                    replace<UtensileListaFragment>(R.id.fragmentContainerView)
                     setReorderingAllowed(true)
                     addToBackStack("utensile")
                 }
-                Log.i("MainActivity2.menu","menu utensili clicked!")
+                Log.i("MainActivity2.menu", "menu utensili clicked!")
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
+    fun onUtensileSelected(item: Utensile) {
+        TODO("Implementare gestione inserimento utensili")
+    }
+
+    fun onScaffaleSelected(item: Scaffale) {
+        val editFragment = ScaffaleEditFragment.newInstance(item.codice)
+        supportFragmentManager.commit {
+            replace(R.id.fragmentContainerView, editFragment)
+            setReorderingAllowed(true)
+            addToBackStack("scaffale_edit")
+        }
+    }
+
+
 
 }

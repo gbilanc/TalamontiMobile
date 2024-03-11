@@ -5,7 +5,7 @@ import android.content.Context
 import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 
-class ScaffaleController() {
+class ScaffaleController {
 
     private var dbHelper: DatabaseHelper? = null
     private var database: SQLiteDatabase? = null
@@ -26,12 +26,15 @@ class ScaffaleController() {
         database!!.query(
             "scaffali", columns, "codice=?", arrayOf(codice), null, null, null
         ).use {
-            it.moveToFirst()
-            return Scaffale(
-                it.getString(0),
-                it.getString(1),
-                it.getInt(2)
-            )
+            if( it.moveToFirst()){
+                return Scaffale(
+                    it.getString(0),
+                    it.getString(1),
+                    it.getInt(2)
+                )
+            }else{
+                return Scaffale(codice,"",9600)
+            }
         }
     }
 

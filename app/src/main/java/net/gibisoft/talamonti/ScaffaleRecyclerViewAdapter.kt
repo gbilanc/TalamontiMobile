@@ -1,23 +1,29 @@
 package net.gibisoft.talamonti
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
-import net.gibisoft.talamonti.databinding.FragmentScaffaleBinding
+import androidx.recyclerview.widget.RecyclerView
+import net.gibisoft.talamonti.databinding.FragmentScaffaleItemBinding
 import net.gibisoft.talamonti.entities.Scaffale
 
 /**
  * [RecyclerView.Adapter] that can display a [Scaffale].
  */
 class ScaffaleRecyclerViewAdapter(
-    private val values: List<Scaffale>
+    private val handler: ItemClickHandler<Scaffale>
 ) : RecyclerView.Adapter<ScaffaleRecyclerViewAdapter.ViewHolder>() {
+
+    private var values: List<Scaffale> = mutableListOf()
+    fun setValues(data: List<Scaffale>) {
+        data.also { values = it }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         return ViewHolder(
-            FragmentScaffaleBinding.inflate(
+            FragmentScaffaleItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -30,14 +36,16 @@ class ScaffaleRecyclerViewAdapter(
         val item = values[position]
         holder.text1.text = item.codice
         holder.text2.text = item.toString()
+        holder.ibEdit.setOnClickListener { handler.onItemClick(item) }
     }
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(binding: FragmentScaffaleBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(binding: FragmentScaffaleItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         val text1: TextView = binding.itemText11
         val text2: TextView = binding.itemText12
-
+        val ibEdit: ImageButton = binding.ibEditScaffale
     }
 
 }

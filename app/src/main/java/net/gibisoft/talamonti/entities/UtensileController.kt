@@ -27,13 +27,16 @@ class UtensileController(val context: Context?) {
         database!!.query(
             "utensili", columns, "codice=?", arrayOf(codice), null, null, null
         ).use {
-            it.moveToFirst()
-            return Utensile(
-                it.getString(0),
-                it.getString(1),
-                it.getString(2),
-                it.getInt(3)
-            )
+           if( it.moveToFirst()){
+               return Utensile(
+                   it.getString(0),
+                   it.getString(1),
+                   it.getString(2),
+                   it.getInt(3)
+               )
+           }else{
+               return Utensile(codice,"","",0)
+           }
         }
     }
 
