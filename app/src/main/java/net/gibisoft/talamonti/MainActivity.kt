@@ -10,7 +10,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import net.gibisoft.talamonti.entities.Scaffale
 import net.gibisoft.talamonti.entities.ScaffaleController
 import net.gibisoft.talamonti.entities.Utensile
@@ -33,7 +32,6 @@ class MainActivity : AppCompatActivity() {
             it.setDisplayShowHomeEnabled(true)
             it.setLogo(R.mipmap.ic_launcher_round)
             it.setDisplayUseLogoEnabled(true)
-            it.title = ""
         }
 
     }
@@ -45,7 +43,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle item selection.
         return when (item.itemId) {
             R.id.menu_scaffali -> {
                 val editFragment = ScaffaleListaFragment.newInstance()
@@ -72,6 +69,7 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
     fun onUtensileSelected(item: Utensile) {
         val editFragment = UtensileEditFragment.newInstance(item.codice)
         supportFragmentManager.commit {
@@ -89,7 +87,4 @@ class MainActivity : AppCompatActivity() {
             addToBackStack("scaffale_edit")
         }
     }
-
-
-
 }

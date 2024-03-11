@@ -133,10 +133,12 @@ class ScaffaleController {
         }
 
         fun init_table(context: Context?) {
-            with(newInstance(context)) {
-                this.save(Scaffale("S001", "192.168.0.1", 9600))
-                this.save(Scaffale("S002", "192.168.0.2", 9600))
-                this.close()
+            if (lista(context).isEmpty()) {
+                with(newInstance(context)) {
+                    this.save(Scaffale("S001", "192.168.0.1", 9600))
+                    this.save(Scaffale("S002", "192.168.0.2", 9600))
+                    this.close()
+                }
             }
         }
     }

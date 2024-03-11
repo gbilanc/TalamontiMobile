@@ -27,16 +27,16 @@ class UtensileController(val context: Context?) {
         database!!.query(
             "utensili", columns, "codice=?", arrayOf(codice), null, null, null
         ).use {
-           if( it.moveToFirst()){
-               return Utensile(
-                   it.getString(0),
-                   it.getString(1),
-                   it.getString(2),
-                   it.getInt(3)
-               )
-           }else{
-               return Utensile(codice,"","",0)
-           }
+            if (it.moveToFirst()) {
+                return Utensile(
+                    it.getString(0),
+                    it.getString(1),
+                    it.getString(2),
+                    it.getInt(3)
+                )
+            } else {
+                return Utensile(codice, "", "", 0)
+            }
         }
     }
 
@@ -107,18 +107,20 @@ class UtensileController(val context: Context?) {
 
 
         fun init_table(context: Context?) {
-            with(newInstance(context)) {
-                this.save(Utensile("U01", "prova utensile 1", "S001", 1))
-                this.save(Utensile("U02", "prova utensile 2", "S001", 1))
-                this.save(Utensile("U03", "prova utensile 3", "S001", 2))
-                this.save(Utensile("U04", "prova utensile 4", "S001", 3))
-                this.save(Utensile("U05", "prova utensile 5", "S001", 3))
-                this.save(Utensile("U06", "prova utensile 6", "S002", 1))
-                this.save(Utensile("U07", "prova utensile 7", "S002", 1))
-                this.save(Utensile("U08", "prova utensile 8", "S002", 2))
-                this.save(Utensile("U09", "prova utensile 9", "S002", 3))
-                this.save(Utensile("U10", "prova utensile 10", "S002", 3))
-                this.close()
+            if (ScaffaleController.lista(context).isEmpty()) {
+                with(newInstance(context)) {
+                    this.save(Utensile("U01", "prova utensile 1", "S001", 1))
+                    this.save(Utensile("U02", "prova utensile 2", "S001", 1))
+                    this.save(Utensile("U03", "prova utensile 3", "S001", 2))
+                    this.save(Utensile("U04", "prova utensile 4", "S001", 3))
+                    this.save(Utensile("U05", "prova utensile 5", "S001", 3))
+                    this.save(Utensile("U06", "prova utensile 6", "S002", 1))
+                    this.save(Utensile("U07", "prova utensile 7", "S002", 1))
+                    this.save(Utensile("U08", "prova utensile 8", "S002", 2))
+                    this.save(Utensile("U09", "prova utensile 9", "S002", 3))
+                    this.save(Utensile("U10", "prova utensile 10", "S002", 3))
+                    this.close()
+                }
             }
         }
     }
