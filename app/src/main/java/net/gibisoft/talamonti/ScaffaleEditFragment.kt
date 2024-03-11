@@ -9,9 +9,6 @@ import net.gibisoft.talamonti.databinding.FragmentScaffaleEditBinding
 import net.gibisoft.talamonti.entities.Scaffale
 import net.gibisoft.talamonti.entities.ScaffaleController
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val CODICE = "codice_scaffale"
 
 /**

@@ -71,7 +71,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun onUtensileSelected(item: Utensile) {
-        TODO("Implementare gestione inserimento utensili")
+        val editFragment = UtensileEditFragment.newInstance(item.codice)
+        supportFragmentManager.commit {
+            replace(R.id.fragmentContainerView, editFragment)
+            setReorderingAllowed(true)
+            addToBackStack("utensile_edit")
+        }
     }
 
     fun onScaffaleSelected(item: Scaffale) {

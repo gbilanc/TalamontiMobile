@@ -4,15 +4,19 @@
 
     <string name="scaffali">scaffali</string>
     <string name="utensili">utensili</string>
-    <string name="riga1">riga1</string>
-    <string name="riga2">riga2</string>
+    <string name="riga1">descrizione uno</string>
+    <string name="riga2">descrizione due</string>
     <string name="ricerca_utensile">ricerca utensile</string>
     <string name="ibfindutensile">ibFindUtensile</string>
     <string name="ibaddutensile">ibAddUtensile</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ibeditutensile">ibEditUtensile</string>
     <string name="codice">codice</string>
     <string name="indirizzo_ip">indirizzo ip</string>
     <string name="porta">porta</string>
+    <string name="descrizione">descrizione</string>
+    <string name="scaffale">scaffale</string>
+    <string name="posizione">cassetto</string>
+    <string name="save">save</string>
+    <string name="delete">delete</string>
+    <string name="homepage">homepage</string>
 </resources>
