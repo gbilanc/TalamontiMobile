@@ -5,7 +5,18 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:textColorSecondary">#ffffff</item>
     </style>
-
-    <style name="Theme.Talamonti" parent="Theme.AppCompat.Light.NoActionBar.FullScreen" />
+    <style name="imb_style">
+        <item name="android:background">@drawable/round_corners</item>
+        <item name="android:padding">8dp</item>
+    </style>
+    <style name="Theme.Talamonti" parent="Theme.AppCompat.Light.NoActionBar.FullScreen">
+        <item name="android:background">@color/primary_back</item>
+        <item name="android:windowBackground">@color/primary_back</item>
+        <item name="android:colorBackground">@color/primary_back</item>
+        <item name="android:textColor">@color/primary_stroke</item>
+        <item name="android:editTextColor">@color/primary_stroke</item>
+        <item name="android:textColorHint">@color/hint_stroke</item>
+    </style>
 </resources>

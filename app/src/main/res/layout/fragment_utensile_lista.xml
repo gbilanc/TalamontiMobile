@@ -23,21 +23,30 @@
 
     <ImageButton
         android:id="@+id/ibFindUtensile"
+        style="@style/imb_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/ibfindutensile"
         android:src="@android:drawable/ic_menu_search"
+        app:layout_constraintBottom_toTopOf="@+id/utensileRecyclerView"
         app:layout_constraintEnd_toStartOf="@+id/ibAddUtensile"
         app:layout_constraintStart_toEndOf="@id/textFinder"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/ibAddUtensile"
+        style="@style/imb_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/ibaddutensile"
         android:src="@android:drawable/ic_menu_add"
+        app:layout_constraintBottom_toTopOf="@+id/utensileRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ibFindUtensile"
         app:layout_constraintTop_toTopOf="parent" />

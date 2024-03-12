@@ -105,7 +105,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/design_default_color_primary"
+        android:background="@drawable/round_corners"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -114,22 +114,28 @@
 
         <ImageButton
             android:id="@+id/ibSaveUtensile"
+            style="@style/imb_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:contentDescription="@string/save"
             android:src="@android:drawable/ic_menu_save" />
 
         <ImageButton
             android:id="@+id/ibDeleteUtensile"
+            style="@style/imb_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:contentDescription="@string/delete"
             android:src="@android:drawable/ic_menu_delete" />
 
         <ImageButton
             android:id="@+id/ibHomepage"
+            style="@style/imb_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:contentDescription="@string/homepage"
             android:src="@android:drawable/ic_menu_close_clear_cancel" />
     </LinearLayout>
