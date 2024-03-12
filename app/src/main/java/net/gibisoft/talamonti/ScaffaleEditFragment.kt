@@ -74,14 +74,14 @@ class ScaffaleEditFragment : Fragment() {
         val dialogBuilder = AlertDialog.Builder(activity)
         dialogBuilder.setMessage(getString(R.string.message2))
             .setCancelable(true)
-            .setPositiveButton("Si") { dialog, id ->
+            .setPositiveButton("Si") { dialog, _ ->
                 run {
                     ScaffaleController.delete(context, binding.editTextCodice.text.toString())
                     requireActivity().supportFragmentManager.popBackStack()
                 }
                 dialog.dismiss()
             }
-            .setNegativeButton("No") { dialog, id ->
+            .setNegativeButton("No") { dialog, _ ->
                 dialog.dismiss()
             }
         return dialogBuilder.create()

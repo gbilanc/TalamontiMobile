@@ -26,14 +26,14 @@ class ScaffaleController {
         database!!.query(
             "scaffali", columns, "codice=?", arrayOf(codice), null, null, null
         ).use {
-            if( it.moveToFirst()){
+            if (it.moveToFirst()) {
                 return Scaffale(
                     it.getString(0),
                     it.getString(1),
                     it.getInt(2)
                 )
-            }else{
-                return Scaffale(codice,"",9600)
+            } else {
+                return Scaffale(codice, "", 9600)
             }
         }
     }
@@ -74,16 +74,19 @@ class ScaffaleController {
                 )
             }
         }
+        result.forEach { item ->
+            item.cassetti = lista_cassetti(item.codice)
+        }
         return result
     }
 
-    private fun lista_cassetti(scaffale: String): Array<Cassetto> {
+    private fun lista_cassetti(codScaffale: String): Array<Cassetto> {
         val result = Array(20) { index ->
-            Cassetto(scaffale, index + 1, 1, 0)
+            Cassetto(codScaffale, index + 1, 1, 0)
         }
         val columns = arrayOf("scaffale", "posizione", "capacita", "numpezzi")
         database!!.query(
-            "cassetti_view", columns, "scaffale=?", arrayOf(scaffale), null, null, "posizione"
+            "cassetti_view", columns, "scaffale=?", arrayOf(codScaffale), null, null, "posizione"
         ).use {
             while (it.moveToNext()) {
                 result[it.getInt(1) - 1] =

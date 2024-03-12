@@ -8,16 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import net.gibisoft.talamonti.databinding.FragmentUtensileEditBinding
-import net.gibisoft.talamonti.entities.Cassetto
 import net.gibisoft.talamonti.entities.Scaffale
 import net.gibisoft.talamonti.entities.ScaffaleController
 import net.gibisoft.talamonti.entities.Utensile
 import net.gibisoft.talamonti.entities.UtensileController
-import java.util.Arrays
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,22 +28,24 @@ private const val CODICE = "codice_utensile"
 class UtensileEditFragment : Fragment() {
     private var utensile = Utensile()
     private var scaffale = Scaffale()
-    private lateinit var scaffaleAdapter: ArrayAdapter<Scaffale>
-    private lateinit var cassettoAdapter: ArrayAdapter<Cassetto>
+    private lateinit var scaffaleAdapter: ScaffaleAdapter
+    private lateinit var cassettoAdapter: CassettoAdapter
     private var _binding: FragmentUtensileEditBinding? = null
     private val binding get() = _binding!!
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        scaffaleAdapter = ArrayAdapter(
+        scaffaleAdapter = ScaffaleAdapter(
             context,
-            R.layout.scaffale_spinner_item, R.id.textView5,
+            R.layout.scaffale_spinner_item,
+            R.id.textView5,
             ScaffaleController.lista(context)
         )
-        cassettoAdapter = ArrayAdapter(
+        cassettoAdapter = CassettoAdapter(
             context,
-            R.layout.cassetto_spinner_item, R.id.textView6,
-            scaffale.getListaCassetti()
+            R.layout.cassetto_spinner_item,
+            R.id.textView6,
+            scaffale.listaCassetti()
         )
     }
 
@@ -70,7 +69,7 @@ class UtensileEditFragment : Fragment() {
         binding.scaffaleSpinner.onItemSelectedListener = selectionHandler
         binding.scaffaleSpinner.setSelection(scaffaleAdapter.getPosition(scaffale))
         binding.cassettoSpinner.adapter = cassettoAdapter
-        binding.cassettoSpinner.setSelection(utensile.posizione)
+        binding.cassettoSpinner.setSelection(utensile.posizione - 1)
         binding.ibHomepage.setOnClickListener { close() }
         binding.ibDeleteUtensile.setOnClickListener { delete() }
         binding.ibSaveUtensile.setOnClickListener { save() }
@@ -106,8 +105,8 @@ class UtensileEditFragment : Fragment() {
         val utensile = Utensile(
             binding.editTextCodice.text.toString(),
             binding.editTextDescrizione.text.toString(),
-            binding.scaffaleSpinner.selectedItem.toString(),
-            binding.cassettoSpinner.selectedItemPosition
+            (binding.scaffaleSpinner.selectedItem as Scaffale).codice,
+            binding.cassettoSpinner.selectedItemPosition + 1
         )
         UtensileController.save(context, utensile)
         Toast.makeText(activity, getString(R.string.message1), Toast.LENGTH_SHORT).show();
@@ -134,6 +133,7 @@ class UtensileEditFragment : Fragment() {
             }
         return dialogBuilder.create()
     }
+
 
     companion object {
         @JvmStatic

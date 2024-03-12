@@ -9,11 +9,7 @@ data class Scaffale(
         Cassetto(codice, index + 1, 1, 0)
     }
 
-    override fun toString(): String {
-        return codice
-    }
-
-    fun getListaCassetti(): MutableList<Cassetto> {
+    fun listaCassetti(): MutableList<Cassetto> {
         return cassetti.toMutableList()
     }
 }

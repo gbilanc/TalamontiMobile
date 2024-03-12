@@ -2,5 +2,7 @@
 <resources>
     <color name="list_back">#008080</color>
     <color name="list_stroke">#ffffff</color>
+    <color name="cassetto_pieno">#ff8080</color>
+    <color name="cassetto_vuoto">#80ff80</color>
 
 </resources>

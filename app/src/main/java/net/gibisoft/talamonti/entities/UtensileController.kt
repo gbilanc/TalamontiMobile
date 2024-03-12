@@ -107,7 +107,7 @@ class UtensileController(val context: Context?) {
 
 
         fun init_table(context: Context?) {
-            if (ScaffaleController.lista(context).isEmpty()) {
+            if (lista(context).isEmpty()) {
                 with(newInstance(context)) {
                     this.save(Utensile("U01", "prova utensile 1", "S001", 1))
                     this.save(Utensile("U02", "prova utensile 2", "S001", 1))

@@ -13,7 +13,7 @@ data class Utensile(
     }
 
     fun getScaffaleAndPosizione(): String {
-        return "scaffale: $scaffale, cassetto: ${posizione+1}"
+        return "scaffale: $scaffale, cassetto: $posizione"
     }
 
 }
