@@ -8,5 +8,13 @@ data class Scaffale(
     var cassetti: Array<Cassetto> = Array(20) { index ->
         Cassetto(codice, index + 1, 1, 0)
     }
+
+    override fun toString(): String {
+        return codice
+    }
+
+    fun getListaCassetti(): MutableList<Cassetto> {
+        return cassetti.toMutableList()
+    }
 }
 

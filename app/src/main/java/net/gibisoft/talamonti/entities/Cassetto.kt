@@ -10,5 +10,9 @@ data class Cassetto(
     fun isPieno(): Boolean {
         return numpezzi >= capacita
     }
+
+    override fun toString(): String {
+        return "$scaffale.$posizione"
+    }
 }
 
