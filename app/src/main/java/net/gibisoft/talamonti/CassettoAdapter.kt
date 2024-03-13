@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
@@ -18,7 +19,8 @@ class CassettoAdapter(
     val cassetti: List<Cassetto>
 ) :
     ArrayAdapter<Cassetto>(context, layoutResourceId, textViewResourceId, cassetti) {
-
+    val ledGreen = ContextCompat.getDrawable(context, R.drawable.green_led_on)
+    val ledRed = ContextCompat.getDrawable(context, R.drawable.red_led_on)
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         return buildView(position, convertView, parent)
     }
@@ -35,11 +37,11 @@ class CassettoAdapter(
             if (cassetti[position].isPieno()) {
                 it.isClickable = true
                 it.isEnabled = false
-                it.setBackgroundColor(ContextCompat.getColor(context, R.color.cassetto_pieno))
+                view.findViewById<ImageView>(R.id.imageViewLed).setImageDrawable(ledRed)
             } else {
                 it.isClickable = false
                 it.isEnabled = true
-                it.setBackgroundColor(ContextCompat.getColor(context, R.color.cassetto_vuoto))
+                view.findViewById<ImageView>(R.id.imageViewLed).setImageDrawable(ledGreen)
             }
         }
         return view

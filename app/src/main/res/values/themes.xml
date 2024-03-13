@@ -12,10 +12,11 @@
         <item name="android:padding">8dp</item>
     </style>
     <style name="Theme.Talamonti" parent="Theme.AppCompat.Light.NoActionBar.FullScreen">
-        <item name="android:background">@color/primary_back</item>
-        <item name="android:windowBackground">@color/primary_back</item>
-        <item name="android:colorBackground">@color/primary_back</item>
-        <item name="android:textColor">@color/primary_stroke</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:windowBackground">@drawable/gradient</item>
+        <item name="android:colorBackground">@color/transparent</item>
+        <item name="android:itemBackground">@color/primary_back</item>
+        <item name="android:textColor">@color/edit_stroke</item>
         <item name="android:editTextColor">@color/primary_stroke</item>
         <item name="android:textColorHint">@color/hint_stroke</item>
     </style>

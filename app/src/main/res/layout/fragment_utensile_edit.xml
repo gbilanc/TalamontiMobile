@@ -26,6 +26,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:autofillHints=""
+        android:background="@drawable/roud_inputbox"
         android:ems="10"
         android:hint="@string/codice"
         android:inputType="text"
@@ -51,6 +52,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:autofillHints=""
+        android:background="@drawable/roud_inputbox"
         android:ems="10"
         android:hint="@string/descrizione"
         android:inputType="text"
@@ -103,9 +105,8 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/round_corners"
+        android:layout_margin="4dp"
+        android:background="@drawable/roud_button"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -118,6 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:background="@drawable/roud_button"
             android:contentDescription="@string/save"
             android:src="@android:drawable/ic_menu_save" />
 
@@ -126,7 +128,7 @@
             style="@style/imb_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:background="@drawable/roud_button"
             android:contentDescription="@string/delete"
             android:src="@android:drawable/ic_menu_delete" />
 
@@ -135,7 +137,7 @@
             style="@style/imb_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:background="@drawable/roud_button"
             android:contentDescription="@string/homepage"
             android:src="@android:drawable/ic_menu_close_clear_cancel" />
     </LinearLayout>

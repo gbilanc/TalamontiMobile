@@ -5,6 +5,7 @@
     style="@style/Theme.Talamonti"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/transparent"
     tools:context=".ScaffaleListaFragment">
 
     <ImageButton
@@ -13,13 +14,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="8dp"
+        android:background="@drawable/roud_button"
         android:contentDescription="@string/ibaddutensile"
         android:src="@android:drawable/ic_menu_add"
         app:layout_constraintBottom_toTopOf="@+id/scaffaleRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -27,8 +27,6 @@
         android:name="net.gibisoft.talamonti.ScaffaleFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
