@@ -12,24 +12,28 @@ import java.net.SocketTimeoutException
 import java.util.Arrays
 
 
-class Connection(val context: Context, val serverAddress: String, val serverPort: Int) {
+class Connection(
+    val context: Context,
+    private val serverAddress: String,
+    private val serverPort: Int
+) {
 
-    private val SO_TIMEOUT: Int = 2000
+    private val soTimeout: Int = 2000
 
-    fun sendFinsMessage(message: Message): IntArray {
+    private fun sendFinsMessage(message: Message): IntArray {
         val response = IntArray(32)
         try {
             DatagramSocket().use { ss ->
-                ss.setSoTimeout(SO_TIMEOUT)
+                ss.setSoTimeout(soTimeout)
                 val address = InetAddress.getByName(serverAddress)
                 val msb: ByteArray = message.getMessageBytes()
-                val dgreq =
+                val datagramRequest =
                     DatagramPacket(msb, msb.size, address, serverPort)
-                ss.send(dgreq)
+                ss.send(datagramRequest)
                 val buffer = ByteArray(32)
-                val dgres = DatagramPacket(buffer, buffer.size)
-                ss.receive(dgres)
-                val nb = dgres.data
+                val datagramResponse = DatagramPacket(buffer, buffer.size)
+                ss.receive(datagramResponse)
+                val nb = datagramResponse.data
                 for (i in 0..31) {
                     response[i] = nb[i].toInt() and 0xff
                 }

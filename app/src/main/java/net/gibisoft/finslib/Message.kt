@@ -14,7 +14,7 @@ class Message {
     }
 
     constructor(
-        destinationNodeAddr: Int,
+        destinationNodeAddress: Int,
         memoryArea: Int, registerAddress:
         Int, length: Int
     ) {
@@ -22,7 +22,7 @@ class Message {
             MessageType.READ_MEMORY,
             DEFAULT_GCT,
             DEFAULT_DNA,
-            destinationNodeAddr,
+            destinationNodeAddress,
             DEFAULT_DA2,
             DEFAULT_SNA,
             DEFAULT_SA1,
@@ -38,7 +38,7 @@ class Message {
     }
 
     constructor(
-        destinationNodeAddr: Int,
+        destinationNodeAddress: Int,
         memoryArea: Int,
         registerAddress: Int,
         bits: Int,
@@ -48,7 +48,7 @@ class Message {
             MessageType.READ_MEMORY,
             DEFAULT_GCT,
             DEFAULT_DNA,
-            destinationNodeAddr,
+            destinationNodeAddress,
             DEFAULT_DA2,
             DEFAULT_SNA,
             DEFAULT_SA1,
@@ -64,7 +64,7 @@ class Message {
     }
 
     constructor(
-        destinationNodeAddr: Int,
+        destinationNodeAddress: Int,
         memoryArea: Int,
         registerAddress: Int,
         values: IntArray?,
@@ -74,7 +74,7 @@ class Message {
             MessageType.WRITE_MEMORY,
             DEFAULT_GCT,
             DEFAULT_DNA,
-            destinationNodeAddr,
+            destinationNodeAddress,
             DEFAULT_DA2,
             DEFAULT_SNA,
             DEFAULT_SA1,
@@ -90,7 +90,7 @@ class Message {
     }
 
     constructor(
-        destinationNodeAddr: Int,
+        destinationNodeAddress: Int,
         memoryArea: Int,
         registerAddress: Int,
         bits: Int,
@@ -101,7 +101,7 @@ class Message {
             MessageType.WRITE_MEMORY,
             DEFAULT_GCT,
             DEFAULT_DNA,
-            destinationNodeAddr,
+            destinationNodeAddress,
             DEFAULT_DA2,
             DEFAULT_SNA,
             DEFAULT_SA1,
@@ -182,7 +182,7 @@ class Message {
         return res
     }
 
-    fun getPayload(): IntArray {
+    private fun getPayload(): IntArray {
         return message.slice(16..message.size).toIntArray()
     }
 
@@ -271,24 +271,23 @@ class Message {
     }
 
     companion object {
-        val UNKNOWN_VALUE = -1
-        val NX_ADDRESS = "192.168.250.1"
-        val NX_PORT = 9600
-        val RA_CASSETTO = 10
-        val MAC_WORK_BIT = 0x31
-        val MAC_WORK_WORD = 0x81
-        val MAC_DATA_MEM = 0x82
-        val DEFAULT_GCT = 0x02 //fixed, max 0x07
-        val DEFAULT_DNA = 0x00 //destination network address, 0x00 = local
-        val DEFAULT_DA1 = 0x01 //destination node address,
-        val DEFAULT_DA2 = 0x00 //destination unit address, 0x00 = CPU
-        val DEFAULT_SNA = 0x00 //source network address, 0x00 = local
-        val DEFAULT_SA1 = 0x0a //source node address, 0x00 = CPU
-        val DEFAULT_SA2 = 0x00 //source unit address, 0x00 = local
-        val DEFAULT_SID = 0x00 //source ID
-        val ICF_COMMAND = 0x80
-        val ICF_RESPONSE = 0xC0
-        val RSV = 0x00
+        const val UNKNOWN_VALUE = -1
+        const val NX_ADDRESS = "192.168.250.1"
+        const val NX_PORT = 9600
+        const val MAC_WORK_BIT = 0x31
+        const val MAC_WORK_WORD = 0x81
+        const val MAC_DATA_MEM = 0x82
+        const val DEFAULT_GCT = 0x02 //fixed, max 0x07
+        const val DEFAULT_DNA = 0x00 //destination network address, 0x00 = local
+        const val DEFAULT_DA1 = 0x01 //destination node address,
+        const val DEFAULT_DA2 = 0x00 //destination unit address, 0x00 = CPU
+        const val DEFAULT_SNA = 0x00 //source network address, 0x00 = local
+        const val DEFAULT_SA1 = 0x0a //source node address, 0x00 = CPU
+        const val DEFAULT_SA2 = 0x00 //source unit address, 0x00 = local
+        const val DEFAULT_SID = 0x00 //source ID
+        const val ICF_COMMAND = 0x80
+        const val ICF_RESPONSE = 0xC0
+        const val RSV = 0x00
         val CMD_MEMORY_AREA_READ = intArrayOf(0x01, 0x01)
         val CMD_MEMORY_AREA_WRITE = intArrayOf(0x01, 0x02)
 

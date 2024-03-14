@@ -6,19 +6,19 @@ import java.util.Arrays
 
 
 class Command(
-    private val NodeNumber: String,
-    private val HeaderCode: String,
-    private val BeginningWord: String,
-    private val NumberOfWords: String
+    private val nodeNumber: String,
+    private val headerCode: String,
+    private val beginningWord: String,
+    private val numberOfWords: String
 ) {
 
     fun getByteArray(): ByteArray {
         val charBuffer = CharBuffer.allocate(17)
         charBuffer.put('@')
-        charBuffer.put(NodeNumber)
-        charBuffer.put(HeaderCode)
-        charBuffer.put(BeginningWord)
-        charBuffer.put(NumberOfWords)
+        charBuffer.put(nodeNumber)
+        charBuffer.put(headerCode)
+        charBuffer.put(beginningWord)
+        charBuffer.put(numberOfWords)
         charBuffer.put(getFcs(charBuffer.array()))
         charBuffer.put('*')
         charBuffer.put(0x0D.toChar())
