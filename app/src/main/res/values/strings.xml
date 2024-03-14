@@ -22,4 +22,43 @@
     <string name="message1">registrazione completata!!!</string>
     <string name="message2">confermi la cancellazione??</string>
     <string name="porta_ip">9600</string>
+
+
+    <string name="M000">Normal completion!</string>
+    <string name="M001">Porta seriale non selezionata!</string>
+    <string name="M002">Service cancelled!</string>
+    <string name="M003">Registrazione effettuata!</string>
+    <string name="M004">Cancellazione effettuata!</string>
+    <string name="M005">Confermi la cancellazione?</string>
+    <string name="M006">Reset errori eseguito!</string>
+    <string name="M007">Cassetto %d dello scaffale %s selezionato, Premi il bottone per aprirlo!</string>
+    <string name="M008">Nessun elemento trovato con i parametri indicati!</string>
+    <string name="M010">ATTENZIONE!!</string>
+    <string name="E001">Lunghezza fins errata!</string>
+    <string name="E002">Destination Network Address errato!</string>
+    <string name="E003">Destination Node Address errato!</string>
+    <string name="E004">Destination Unit Address errato!</string>
+    <string name="E005">Service ID errato!</string>
+    <string name="E006">Connessione rete assente!</string>
+    <string name="E007">Selezione cassetto fallita!</string>
+    <string name="E008">Il cassetto selezionato \u00e8 pieno!</string>
+    <string name="E009">Reset errori fallito!</string>
+    <string name="E010">Nessuna risposta dal server!</string>
+    <string name="E011">Nessuno scaffale selezionato!</string>
+    <string name="E012">Nessun cassetto selezionato!</string>
+    <string name="W1700">Azzeramento in corso...</string>
+    <string name="W1701">Posizionamento in corso...</string>
+    <string name="E100">EMERGENZA PREMUTA</string>
+    <string name="E101">ALLARME ASSE TRASVERSALE</string>
+    <string name="E102">ALLARME ASSE VERTICALE</string>
+    <string name="E103">ALLARME CASSETTI FUORI POSIZIONE</string>
+    <string name="E104">ALLARME PIU DI UN CASSETTO APERTO</string>
+    <string name="E105">ALLARME CASSETTO NON INSERITO</string>
+    <string name="E106">ALLARME MASSIMA ESTENSIONE CATENA</string>
+    <string name="E107">ALLARME TIMEOUT MOVIMENTO TRASVERSALE</string>
+    <string name="E108">ALLARME TIMEOUT MOVIMENTO VERTICALE</string>
+    <string name="E109">ALLARME POSTO CASSETTO OCCUPATO</string>
+    <string name="E110">ALLARME POSTO CASSETTO APERTO</string>
+    <string name="E111">ASSI NON PRONTI</string>
+    <string name="E112">AZZERAMENTO AVVIATO</string>
 </resources>
